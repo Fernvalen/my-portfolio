@@ -1,17 +1,63 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+// Optional: You can define data directly in the frontmatter script
+const featuredProjects = [
+  {
+    title: "Project Alpha",
+    description: "A web app built with modern tools to solve everyday workflow challenges.",
+    link: "https://github.com/your-username/project-alpha",
+    tags: ["Astro", "JavaScript", "CSS"]
+  },
+  {
+    title: "Project Beta",
+    description: "A data visualization dashboard showcasing interactive charts and stats.",
+    link: "https://github.com/your-username/project-beta",
+    tags: ["React", "APIs", "Tailwind"]
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home | My Portfolio">
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Hi, I'm <span class="highlight">Your Name</span> 👋</h1>
+    <p class="tagline">
+      Software Developer / Designer passionate about building accessible, performant web experiences.
+    </p>
+    <div class="cta-buttons">
+      <a href="./projects" class="btn primary-btn">View Projects 🚀</a>
+      <a href="./contact" class="btn secondary-btn">Get in Touch ✉️</a>
+    </div>
+  </section>
+
+  <!-- About Preview Section -->
+  <section class="about-preview">
+    <h2>About Me 👤</h2>
+    <p>
+      I specialize in web development, problem-solving, and continuous learning. 
+      Currently exploring modern static architectures and open-source tooling.
+    </p>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section class="projects-preview">
+    <h2>Featured Projects 💻</h2>
+    <div class="project-grid">
+      {featuredProjects.map((project) => (
+        <article class="project-card">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div class="tags">
+            {project.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+          <a href={project.link} target="_blank" rel="noopener noreferrer" class="project-link">
+            View Source →
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
