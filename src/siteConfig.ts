@@ -17,9 +17,9 @@ export const maintenanceConfig = {
   // Enable/disable maintenance mode for specific pages
   pagesUnderConstruction: {
     home: false,
-    about: false,
+    about: true,
     projects: true,
-    blog: false,
+    blog: true,
     contact: false,
   },
 

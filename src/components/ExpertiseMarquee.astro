@@ -1,0 +1,178 @@
+---
+interface SkillItem {
+  name: string;
+  category: 'ai-data' | 'qe-auto' | 'cloud-devops' | 'product-gov';
+  iconText: string;
+  badgeColor: string;
+}
+
+const skills: SkillItem[] = [
+  // AI & Data
+  { name: "LangGraph / Ollama", category: "ai-data", iconText: "🤖", badgeColor: "#a855f7" },
+  { name: "Google Vertex AI", category: "ai-data", iconText: "☁️", badgeColor: "#38bdf8" },
+  { name: "Amazon Bedrock", category: "ai-data", iconText: "⚡", badgeColor: "#f59e0b" },
+  { name: "Python / Pytest", category: "ai-data", iconText: "🐍", badgeColor: "#10b981" },
+  { name: "SQL Server & ETL", category: "ai-data", iconText: "🗄️", badgeColor: "#06b6d4" },
+
+  // QE & Automation
+  { name: "Enterprise TCoE", category: "qe-auto", iconText: "🏛️", badgeColor: "#3b82f6" },
+  { name: "Selenium & Appium", category: "qe-auto", iconText: "🧪", badgeColor: "#22c55e" },
+  { name: "Playwright / Cypress", category: "qe-auto", iconText: "🎭", badgeColor: "#ec4899" },
+  { name: "Dynatrace & JMeter", category: "qe-auto", iconText: "📈", badgeColor: "#14b8a6" },
+  { name: "Pact Contract Testing", category: "qe-auto", iconText: "📜", badgeColor: "#eab308" },
+
+  // Cloud & DevOps
+  { name: "AWS Cloud (CDK/EC2)", category: "cloud-devops", iconText: "📦", badgeColor: "#f97316" },
+  { name: "Azure DevOps", category: "cloud-devops", iconText: "🔷", badgeColor: "#0284c7" },
+  { name: "Jenkins & GitHub Actions", category: "cloud-devops", iconText: "🔄", badgeColor: "#ef4444" },
+  { name: "Google Cloud Run", category: "cloud-devops", iconText: "🚀", badgeColor: "#38bdf8" },
+  { name: "SonarQube & Black Duck", category: "cloud-devops", iconText: "🛡️", badgeColor: "#8b5cf6" },
+
+  // Product & Governance
+  { name: "Technical Product Owner", category: "product-gov", iconText: "📋", badgeColor: "#10b981" },
+  { name: "Scrum Alliance (CSPO)", category: "product-gov", iconText: "🎖️", badgeColor: "#f59e0b" },
+  { name: "Jira / Xray / Zephyr", category: "product-gov", iconText: "📊", badgeColor: "#0ea5e9" },
+  { name: "Salesforce / Zendesk", category: "product-gov", iconText: "💼", badgeColor: "#6366f1" },
+  { name: "ITIL & CAB Governance", category: "product-gov", iconText: "⚖️", badgeColor: "#d946ef" },
+];
+---
+
+<section class="expertise-section">
+  <div class="expertise-header">
+    <p class="section-label">AREAS OF EXPERTISE & TOOLING</p>
+    <h2>Enterprise Platforms, Frameworks & Modern Toolchain</h2>
+  </div>
+
+  <!-- Filter Buttons -->
+  <div class="marquee-controls">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ai-data">AI & Data</button>
+    <button class="filter-btn" data-filter="qe-auto">QE & Automation</button>
+    <button class="filter-btn" data-filter="cloud-devops">Cloud & DevOps</button>
+    <button class="filter-btn" data-filter="product-gov">Product & Governance</button>
+  </div>
+
+  <!-- Dynamic Marquee -->
+  <div class="marquee-wrapper">
+    <div class="marquee-track" id="marqueeTrack">
+      {skills.concat(skills).map((skill) => (
+        <div class="skill-chip" data-category={skill.category} style={`--accent-color: ${skill.badgeColor};`}>
+          <span class="chip-icon">{skill.iconText}</span>
+          <span class="chip-name">{skill.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const skillChips = document.querySelectorAll('.skill-chip');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      skillChips.forEach(chip => {
+        const category = chip.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          (chip as HTMLElement).style.display = 'inline-flex';
+        } else {
+          (chip as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .expertise-section {
+    margin: 4rem 0 2rem 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  .expertise-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .section-label {
+    font-family: monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: #38bdf8;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .expertise-header h2 {
+    font-size: 1.4rem;
+    color: #f8fafc;
+  }
+  .marquee-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .filter-btn {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-btn:hover {
+    border-color: #38bdf8;
+    color: #f8fafc;
+  }
+  .filter-btn.active {
+    background: #1e293b;
+    border-color: #38bdf8;
+    color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+  }
+  .marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 0.5rem 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: scrollMarquee 32s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  .skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-left: 3px solid var(--accent-color);
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  }
+  .chip-name {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  @keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
