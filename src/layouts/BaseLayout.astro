@@ -1,7 +1,27 @@
 ---
 import '../styles/global.css';
-const { title = "My Portfolio" } = Astro.props;
-const base = import.meta.env.BASE_URL;
+import { maintenanceConfig } from '../siteConfig';
+import UnderConstruction from '../components/UnderConstruction.astro';
+
+// Define the valid page keys matching your siteConfig object
+type PageKey = keyof typeof maintenanceConfig.pagesUnderConstruction;
+
+interface Props {
+  title?: string;
+  pageKey?: PageKey; // e.g. 'home', 'about', 'projects', 'blog', 'contact'
+  isUnderConstruction?: boolean; // direct override prop
+}
+
+const { title = "My Portfolio", pageKey, isUnderConstruction = false } = Astro.props;
+const base = import.meta.env.BASE_URL ?? '';
+
+const isSiteLocked = maintenanceConfig?.siteUnderConstruction ?? false;
+const isPageLocked = pageKey && maintenanceConfig?.pagesUnderConstruction 
+  ? Boolean(maintenanceConfig.pagesUnderConstruction[pageKey]) 
+  : false;
+
+const shouldShowMaintenance = isSiteLocked || isPageLocked || isUnderConstruction;
+//console.log("Checking Projects:", { pageKey, isPageLocked, shouldShowMaintenance });
 ---
 
 <!doctype html>
@@ -23,7 +43,11 @@ const base = import.meta.env.BASE_URL;
     </header>
 
     <main>
-      <slot />
+      {shouldShowMaintenance ? (
+        <UnderConstruction customMessage={maintenanceConfig.message} />
+      ) : (
+        <slot />
+      )}
     </main>
 
     <footer>

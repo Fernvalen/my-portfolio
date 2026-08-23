@@ -1,0 +1,54 @@
+---
+interface Props {
+  title?: string;
+  customMessage?: string;
+}
+
+const { 
+  title = "Under Construction", 
+  customMessage = "This page is currently being upgraded and will be available shortly." 
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL ?? '/';
+---
+
+<div class="maintenance-container">
+  <div class="maintenance-card">
+    <div class="maintenance-icon">🚧</div>
+    <h1>{title}</h1>
+    <p>{customMessage}</p>
+    <a href={import.meta.env.BASE_URL} class="btn primary-btn">← Back to Home</a>
+  </div>
+</div>
+
+<style>
+  .maintenance-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 45vh;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  .maintenance-card {
+    border: 1px dashed #f59e0b;
+    background-color: #fffbeb;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    max-width: 540px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  .maintenance-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .maintenance-card h1 {
+    color: #92400e;
+    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
+  }
+  .maintenance-card p {
+    color: #78350f;
+    margin-bottom: 1.5rem;
+  }
+</style>
