@@ -1,15 +1,11 @@
 ---
-layout: ../../layouts/BaseLayout.astro
+layout: ../../layouts/PostLayout.astro
 title: "My First Blog Post"
 pubDate: 2026-08-22
 description: "This is the first post of my new Astro blog."
 author: "Fernando"
 tags: ["astro", "blogging", "learning"]
 ---
-
-# My First Blog Post
-
-Published on: 2026-08-22
 
 Welcome to my new blog built with Astro! 🚀
 
