@@ -1,10 +1,18 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
-const { frontmatter } = Astro.props;
+interface Props {
+  title: string;
+  pubDate: Date | string;
+  description?: string;
+  author?: string;
+  tags?: string[];
+}
+
+const { title, pubDate, description, author, tags = [] } = Astro.props;
 
 // Format the publication date nicely (e.g., Aug 22, 2026)
-const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'short',
   day: 'numeric',
@@ -12,17 +20,17 @@ const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', 
 });
 ---
 
-<BaseLayout title={`${frontmatter.title} | Blog`}>
+<BaseLayout title={`${title} | Blog`} description={description} pageKey="blog">
   <article class="post-container">
     <header class="post-header">
-      <h1>{frontmatter.title}</h1>
+      <h1>{title}</h1>
       <div class="post-meta">
-        <span>Published on <strong>{formattedDate}</strong></span>
-        {frontmatter.author && <span> • By {frontmatter.author}</span>}
+        <span>Published on <time datetime={new Date(pubDate).toISOString()}>{formattedDate}</time></span>
+        {author && <span> • By {author}</span>}
       </div>
-      {frontmatter.tags && frontmatter.tags.length > 0 && (
+      {tags && tags.length > 0 && (
         <div class="tags">
-          {frontmatter.tags.map((tag: string) => (
+          {tags.map((tag: string) => (
             <span class="tag">#{tag}</span>
           ))}
         </div>
@@ -42,22 +50,45 @@ const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', 
     max-width: 720px;
     margin: 0 auto;
   }
+  .post-header {
+    margin-bottom: 1.5rem;
+  }
   .post-header h1 {
     margin-bottom: 0.5rem;
     font-size: 2.2rem;
     line-height: 1.2;
   }
   .post-meta {
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.95rem;
     margin-bottom: 1rem;
   }
   .divider {
     border: none;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-color);
     margin: 1.5rem 0 2rem 0;
   }
   .post-content {
     line-height: 1.8;
+    color: var(--text-main);
+  }
+  .post-content :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+  }
+  .post-content :global(h3) {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+  }
+  .post-content :global(p) {
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+  .post-content :global(ul) {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
   }
 </style>

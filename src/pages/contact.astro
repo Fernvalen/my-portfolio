@@ -1,16 +1,58 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../siteConfig';
 ---
 
-<BaseLayout title="Contact | My Portfolio" pageKey="contact">
-  <section>
+<BaseLayout 
+  title={`Contact | ${siteConfig.name}`} 
+  description="Connect with Fernando Valenzuela Jr. for executive consulting, advisory, quality engineering, and technical leadership opportunities."
+  pageKey="contact"
+>
+  <section class="contact-section">
     <h1>Get in Touch ✉️</h1>
-    <p>Feel free to reach out for collaborations, inquiries, or just to say hello!</p>
+    <p>Feel free to reach out for leadership opportunities, architecture consultations, or collaborations.</p>
 
-    <ul>
-      <li>📧 <strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></li>
-      <li>🐙 <strong>GitHub:</strong> <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">github.com/your-username</a></li>
-      <li>💼 <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener noreferrer">linkedin.com/in/your-username</a></li>
+    <ul class="contact-list">
+      <li>
+        📧 <strong>Email:</strong> 
+        <a href={`mailto:${siteConfig.socials.email}`}>{siteConfig.socials.email}</a>
+      </li>
+      <li>
+        🐙 <strong>GitHub:</strong> 
+        <a 
+          href={siteConfig.socials.github} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          aria-label="GitHub Profile (opens in a new tab)"
+        >
+          {siteConfig.socials.github.replace('https://', '')}
+        </a>
+      </li>
+      <li>
+        💼 <strong>LinkedIn:</strong> 
+        <a 
+          href={siteConfig.socials.linkedin} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          aria-label="LinkedIn Profile (opens in a new tab)"
+        >
+          {siteConfig.socials.linkedin.replace('https://', '')}
+        </a>
+      </li>
     </ul>
   </section>
 </BaseLayout>
+
+<style>
+  .contact-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .contact-list li {
+    font-size: 1.05rem;
+  }
+</style>

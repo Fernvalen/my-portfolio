@@ -5,6 +5,7 @@ import WorkstationHero from '../components/WorkstationHero.astro';
 import ExpertiseMarquee from '../components/ExpertiseMarquee.astro';
 
 const base = import.meta.env.BASE_URL ?? '';
+const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
 ---
 
 <BaseLayout title="Fernando Valenzuela Jr. | Technology Leader & Quality Architect" pageKey="home">
@@ -22,8 +23,8 @@ const base = import.meta.env.BASE_URL ?? '';
     </p>
 
     <div class="hero-actions">
-      <a href={`${base}/projects`} class="btn primary-btn">Explore Projects & Architecture →</a>
-      <a href={`${base}/contact`} class="btn secondary-btn">Get in Touch</a>
+      <a href={`${normalizedBase}/projects`} class="btn primary-btn">Explore Projects & Architecture →</a>
+      <a href={`${normalizedBase}/contact`} class="btn secondary-btn">Get in Touch</a>
     </div>
 
     <!-- Custom Multi-Monitor Command Center SVG -->

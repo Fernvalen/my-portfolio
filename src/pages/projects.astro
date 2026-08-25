@@ -1,32 +1,44 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../siteConfig';
 
-const allProjects = [
+interface ProjectItem {
+  title: string;
+  description: string;
+  link: string;
+  tags: string[];
+}
+
+const allProjects: ProjectItem[] = [
   {
-    title: "Personal Portfolio",
-    description: "A fast, responsive portfolio built with Astro and hosted on GitHub Pages.",
-    link: "https://github.com/your-username/my-portfolio",
-    tags: ["Astro", "HTML", "CSS"]
+    title: "Personal Portfolio & Architecture Hub",
+    description: "A fast, responsive portfolio and architecture showcase built with Astro, modern CSS tokens, and hosted on GitHub Pages.",
+    link: `${siteConfig.socials.github}/my-portfolio`,
+    tags: ["Astro 5+", "TypeScript", "Modern CSS", "GitHub Pages"]
   },
   {
-    title: "Task Tracker App",
-    description: "A productivity web application to manage daily tasks and deadlines.",
-    link: "https://github.com/your-username/task-tracker",
-    tags: ["JavaScript", "Local Storage", "CSS"]
+    title: "AI-Powered Quality Engineering Framework",
+    description: "Multi-agent autonomous test generation and contract validation pipeline utilizing LangGraph and Python.",
+    link: `${siteConfig.socials.github}/ai-quality-engine`,
+    tags: ["Python", "LangGraph", "Pytest", "Docker"]
   },
   {
-    title: "Weather Dashboard",
-    description: "An interactive dashboard fetching real-time forecast data via external APIs.",
-    link: "https://github.com/your-username/weather-app",
-    tags: ["REST API", "JavaScript", "Async/Await"]
+    title: "Enterprise TCoE Dashboard & Telemetry",
+    description: "Real-time quality gates, Dynatrace APM telemetry ingestion, and CAB release readiness dashboards.",
+    link: `${siteConfig.socials.github}/tcoe-observability`,
+    tags: ["APM", "Dynatrace", "DevOps", "CI/CD"]
   }
 ];
 ---
 
-<BaseLayout title="Projects | My Portfolio" pageKey="projects">
+<BaseLayout 
+  title={`Projects | ${siteConfig.name}`} 
+  description="Explore engineering projects, testing frameworks, and enterprise architecture by Fernando Valenzuela Jr."
+  pageKey="projects"
+>
   <section>
     <h1>My Projects 💻</h1>
-    <p>A collection of applications, tools, and experiments I've built.</p>
+    <p>A collection of applications, architecture frameworks, and engineering tools I've built.</p>
 
     <div class="project-grid">
       {allProjects.map((project) => (
@@ -38,7 +50,13 @@ const allProjects = [
               <span class="tag">{tag}</span>
             ))}
           </div>
-          <a href={project.link} target="_blank" rel="noopener noreferrer" class="project-link">
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="project-link"
+            aria-label={`View source code for ${project.title} (opens in a new tab)`}
+          >
             View Source →
           </a>
         </article>

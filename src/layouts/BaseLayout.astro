@@ -1,19 +1,24 @@
 ---
 import '../styles/global.css';
-import { maintenanceConfig } from '../siteConfig';
+import { siteConfig, maintenanceConfig, type PageKey } from '../siteConfig';
 import UnderConstruction from '../components/UnderConstruction.astro';
-
-// Define the valid page keys matching your siteConfig object
-type PageKey = keyof typeof maintenanceConfig.pagesUnderConstruction;
 
 interface Props {
   title?: string;
-  pageKey?: PageKey; // e.g. 'home', 'about', 'projects', 'blog', 'contact'
-  isUnderConstruction?: boolean; // direct override prop
+  description?: string;
+  pageKey?: PageKey;
+  isUnderConstruction?: boolean;
 }
 
-const { title = "My Portfolio", pageKey, isUnderConstruction = false } = Astro.props;
+const { 
+  title = siteConfig.title, 
+  description = siteConfig.description, 
+  pageKey, 
+  isUnderConstruction = false 
+} = Astro.props;
+
 const base = import.meta.env.BASE_URL ?? '';
+const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
 
 const isSiteLocked = maintenanceConfig?.siteUnderConstruction ?? false;
 const isPageLocked = pageKey && maintenanceConfig?.pagesUnderConstruction 
@@ -21,7 +26,7 @@ const isPageLocked = pageKey && maintenanceConfig?.pagesUnderConstruction
   : false;
 
 const shouldShowMaintenance = isSiteLocked || isPageLocked || isUnderConstruction;
-//console.log("Checking Projects:", { pageKey, isPageLocked, shouldShowMaintenance });
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteConfig.siteUrl);
 ---
 
 <!doctype html>
@@ -29,16 +34,44 @@ const shouldShowMaintenance = isSiteLocked || isPageLocked || isUnderConstructio
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO & Metadata -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.author} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href={`${normalizedBase}/favicon.svg`} />
+    <link rel="alternate icon" href={`${normalizedBase}/favicon.ico`} />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteConfig.name} />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
   </head>
   <body>
-    <header>
-      <nav>
-        <a href={`${base}/`}>Home</a>
-        <a href={`${base}/about`}>About</a>
-        <a href={`${base}/projects`}>Projects</a>
-        <a href={`${base}/blog`}>Blog</a>
-        <a href={`${base}/contact`}>Contact</a>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Main Navigation">
+        {siteConfig.navItems.map((item) => {
+          const itemHref = item.href === '/' ? `${normalizedBase}/` : `${normalizedBase}${item.href}`;
+          const isActive = pageKey === item.key;
+          return (
+            <a 
+              href={itemHref} 
+              class={isActive ? 'active' : undefined}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })}
       </nav>
     </header>
 
@@ -50,8 +83,8 @@ const shouldShowMaintenance = isSiteLocked || isPageLocked || isUnderConstructio
       )}
     </main>
 
-    <footer>
-      <p>&copy; {new Date().getFullYear()} My Portfolio. Built with Astro.</p>
+    <footer class="site-footer">
+      <p>&copy; {new Date().getFullYear()} {siteConfig.name}. Built with modern Astro.</p>
     </footer>
   </body>
 </html>

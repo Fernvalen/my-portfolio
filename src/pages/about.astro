@@ -1,19 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../siteConfig';
 ---
 
-<BaseLayout title="About Me | My Portfolio" pageKey="about">
-  <section>
+<BaseLayout 
+  title={`About Me | ${siteConfig.name}`} 
+  description="Learn more about Fernando Valenzuela Jr. - Technology Leader, Quality Architect, and Product Owner."
+  pageKey="about"
+>
+  <section class="about-section">
     <h1>About Me 👤</h1>
     <p>
-      Hello! I'm a Quality Engineer Leader and Product Owner, passionate about building scalable and reliable software solutions.
+      Hello! I'm a Quality Engineering Leader, Architect, and Product Owner passionate about building scalable, reliable software solutions, establishing high-performing Testing Centers of Excellence (TCoE), and driving AI-powered quality workflows.
     </p>
-    <h2>Skills & Technologies 🛠️</h2>
+    <h2>Skills & Core Focus 🛠️</h2>
     <ul>
-      <li>JavaScript / TypeScript</li>
-      <li>HTML5 & CSS3</li>
-      <li>Astro & Modern Frameworks</li>
-      <li>Git & GitHub Actions</li>
+      <li>AI-Driven Quality Engineering & LLM Guardrails</li>
+      <li>Distributed Systems Testing & Contract Validation (Pact)</li>
+      <li>Cloud & DevOps Pipelines (AWS, Azure, GCP, Jenkins, GitHub Actions)</li>
+      <li>Enterprise Quality Leadership & Product Governance (CSPO, ITIL, CAB)</li>
     </ul>
   </section>
 </BaseLayout>

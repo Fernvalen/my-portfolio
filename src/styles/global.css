@@ -17,6 +17,9 @@
   --border-hover: #334155;
   --success: #22c55e;
   --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --warning-border: rgba(245, 158, 11, 0.35);
+  --warning-text: #fbbf24;
 }
 
 /* 2. Global Reset & Box Sizing */
@@ -51,7 +54,7 @@ main {
 }
 
 /* 5. Navigation Bar */
-header {
+.site-header {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -61,7 +64,7 @@ header {
   border-bottom: 1px solid var(--border-color);
 }
 
-nav {
+.site-nav {
   max-width: 1024px;
   margin: 0 auto;
   display: flex;
@@ -71,17 +74,31 @@ nav {
   padding: 1.1rem 1.5rem;
 }
 
-nav a {
+.site-nav a {
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
   transition: color 0.2s ease, text-shadow 0.2s ease;
+  position: relative;
 }
 
-nav a:hover {
+.site-nav a:hover,
+.site-nav a.active {
   color: var(--accent-cyan);
   text-shadow: 0 0 8px var(--accent-cyan-glow);
+}
+
+.site-nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-cyan);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--accent-cyan-glow);
 }
 
 /* 6. Typography */
@@ -120,6 +137,12 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 ul, ol {
@@ -231,7 +254,7 @@ li {
 }
 
 /* 10. Footer */
-footer {
+.site-footer {
   text-align: center;
   padding: 2rem 1rem;
   border-top: 1px solid var(--border-color);
@@ -240,12 +263,25 @@ footer {
   background-color: var(--bg-primary);
 }
 
-/* 11. Responsive Adjustments */
+/* 11. Accessibility: Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 12. Responsive Adjustments */
 @media (max-width: 640px) {
-  nav {
+  .site-nav {
     gap: 1rem;
     padding: 1rem 0.5rem;
     font-size: 0.85rem;
+    flex-wrap: wrap;
   }
 
   h1 {
