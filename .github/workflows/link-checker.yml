@@ -32,6 +32,7 @@ jobs:
           args: >-
             --verbose 
             --no-progress 
+            --root-dir .
             --remap "^/my-portfolio ./dist"
             --remap "https://fernvalen.github.io/my-portfolio ./dist"
             './dist/**/*.html'
