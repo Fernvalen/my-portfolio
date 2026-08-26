@@ -21,20 +21,22 @@ jobs:
           node-version: 22
           cache: 'npm'
 
-      - name: Install & Build
+      - name: Install & Build Site
         run: |
           npm ci
           npm run build
 
-      - name: Check Static Links
+      - name: Start Astro Preview Server
+        run: |
+          npx astro preview --background
+          sleep 3
+
+      - name: Check Site Links
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
             --verbose 
             --no-progress 
-            --root-dir .
-            --remap "^/my-portfolio ./dist"
-            --remap "https://fernvalen.github.io/my-portfolio ./dist"
-            './dist/**/*.html'
+            http://localhost:4321/my-portfolio/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
