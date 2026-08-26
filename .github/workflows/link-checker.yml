@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'src/pages/posts/**.md'
-      - 'src/pages/**.astro'
+    - 'src/content/blog/**.md' # <-- Updated path
+    - 'src/pages/**.astro'
 
 jobs:
   link-checker:
