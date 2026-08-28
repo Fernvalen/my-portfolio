@@ -1,63 +1,191 @@
 ---
 // src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WorkstationHero from '../components/WorkstationHero.astro';
-import ExpertiseMarquee from '../components/ExpertiseMarquee.astro';
 
 const base = import.meta.env.BASE_URL ?? '';
-const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
 ---
 
 <BaseLayout title="Fernando Valenzuela Jr. | Technology Leader & Quality Architect" pageKey="home">
-  <section class="hero-section">
-    <div class="hero-badge">
-      <span class="status-dot"></span> Available for Executive & Technical Leadership
-    </div>
+  
+  <div class="canvas-wrapper">
     
-    <h1 class="hero-title">
-      AI-Driven Quality Engineering, Product Ownership & Application Delivery
-    </h1>
-    
-    <p class="hero-subtitle">
-      Over 20 years architecting Enterprise Testing Centers of Excellence (TCoE), leading high-stakes cloud transformations, and establishing autonomous AI-driven quality engineering practices.
-    </p>
+    <!-- Passions Vector Backdrop (Soccer, Gaming, Dogs, Travel) -->
+    <svg class="passions-backdrop" viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- ⚽ Soccer -->
+      <g stroke="#ea580c" stroke-width="1.5" opacity="0.6">
+        <rect x="60" y="80" width="220" height="150" rx="4" fill="none"/>
+        <line x1="170" y1="80" x2="170" y2="230"/>
+        <circle cx="170" cy="155" r="30" fill="none"/>
+        <circle cx="100" cy="120" r="16" fill="none"/>
+        <polygon points="100,110 109,116 106,126 94,126 91,116" fill="#ea580c" opacity="0.3"/>
+      </g>
 
-    <div class="hero-actions">
-      <a href={`${normalizedBase}/projects`} class="btn primary-btn">Explore Projects & Architecture →</a>
-      <a href={`${normalizedBase}/contact`} class="btn secondary-btn">Get in Touch</a>
+      <!-- 🎮 Video Games -->
+      <g stroke="#c2410c" stroke-width="1.5" opacity="0.6" transform="translate(720, 70)">
+        <rect x="0" y="20" width="180" height="95" rx="30" fill="none"/>
+        <path d="M 40 55 L 40 75 M 30 65 L 50 65"/>
+        <circle cx="130" cy="60" r="4" fill="#c2410c"/>
+        <circle cx="145" cy="70" r="4" fill="#c2410c"/>
+        <circle cx="115" cy="70" r="4" fill="#c2410c"/>
+        <circle cx="130" cy="80" r="4" fill="#c2410c"/>
+        <path d="M 20 105 L 10 140 M 160 105 L 170 140"/>
+      </g>
+
+      <!-- 🐕 Dogs -->
+      <g stroke="#ea580c" stroke-width="1.5" opacity="0.6" transform="translate(80, 390)">
+        <path d="M 20 80 Q 25 30 50 25 Q 75 20 85 45 L 110 50 Q 120 70 110 85 L 85 85 L 80 120 L 50 120 Z" fill="none"/>
+        <circle cx="65" cy="45" r="3" fill="#ea580c"/>
+        <circle cx="75" cy="100" r="4" fill="#ea580c" opacity="0.4"/>
+      </g>
+
+      <!-- ✈️ Travel -->
+      <g stroke="#fb923c" stroke-width="1.5" opacity="0.6" transform="translate(720, 380)">
+        <circle cx="100" cy="80" r="40" fill="none" stroke-dasharray="4,4"/>
+        <polygon points="100,30 106,74 150,80 106,86 100,130 94,86 50,80 94,74" fill="#fb923c" opacity="0.2"/>
+        <path d="M -80 120 Q 20 20 120 40" stroke-dasharray="5,5"/>
+        <polygon points="120,40 105,38 115,50" fill="#fb923c"/>
+      </g>
+    </svg>
+
+    <!-- Center Hero Focus (Vertically & Horizontally Centered) -->
+    <main class="hero-minimal">
+      <h1 class="hero-minimal-name">Fernando Valenzuela Jr.</h1>
+      <p class="hero-minimal-title">Technology Leader & Quality Architect</p>
+      <p class="hero-minimal-bio">
+        Specializing in Enterprise TCoE Governance, AI-Driven Quality Engineering harnesses, and resilient Cloud Application Delivery at scale.
+      </p>
+      
+      <div class="hero-cta-wrap">
+        <a href={`${base}/about`} class="btn primary-btn">View Executive Profile →</a>
+      </div>
+
+      <!-- Combined Docks Container (Fixed on Desktop, Stacked Below Button on Mobile) -->
+      <div class="mobile-docks-container">
+        
+        <!-- Left Dock Icons: Contact & Socials -->
+        <aside class="margin-dock dock-left" aria-label="Social and Contact Channels">
+          <a href="mailto:fernando.valenzuela@example.com" class="dock-btn" data-tooltip="Email Me" aria-label="Send Email">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener noreferrer" class="dock-btn" data-tooltip="LinkedIn Profile" aria-label="LinkedIn Profile">
+            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.45 1.45 0 0 0 1.45-1.45 1.45 1.45 0 0 0-1.45-1.45 1.45 1.45 0 0 0-1.45 1.45c0 .8.65 1.45 1.45 1.45m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
+          </a>
+          <a href="https://github.com/Fernvalen" target="_blank" rel="noopener noreferrer" class="dock-btn" data-tooltip="GitHub Repositories" aria-label="GitHub Repositories">
+            <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          </a>
+        </aside>
+
+        <!-- Right Dock Icons: Skills, Tools, Stacks -->
+        <aside class="margin-dock dock-right" aria-label="Technical Details">
+          <button class="dock-btn modal-trigger" data-target="modal-skills" data-tooltip="Core Specializations" aria-label="Open Skills Modal">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </button>
+          <button class="dock-btn modal-trigger" data-target="modal-tools" data-tooltip="Tools & Testing" aria-label="Open Tools Modal">
+            <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+          </button>
+          <button class="dock-btn modal-trigger" data-target="modal-stack" data-tooltip="Tech Stack & AI" aria-label="Open Tech Stack Modal">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </button>
+        </aside>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Modal Overlays -->
+  <div class="modal-overlay" id="modal-skills" role="dialog" aria-modal="true" aria-labelledby="title-skills">
+    <div class="modal-content-box">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <span class="stream-tag">DOMAINS</span>
+      <h2 id="title-skills" style="margin-top: 0.25rem; font-size: 1.4rem;">Core Specializations</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+        Enterprise testing governance, strategic test automation architectures, and engineering management[cite: 1].
+      </p>
+      <div class="tags">
+        <span class="tag">Enterprise TCoE Governance</span>
+        <span class="tag">Technical Product Ownership</span>
+        <span class="tag">Shift-Left Quality Strategy</span>
+        <span class="tag">CAB / ARB Release Gates</span>
+        <span class="tag">High Availability (99.8%)</span>
+      </div>
     </div>
+  </div>
 
-    <!-- Custom Multi-Monitor Command Center SVG -->
-    <WorkstationHero />
-  </section>
+  <div class="modal-overlay" id="modal-tools" role="dialog" aria-modal="true" aria-labelledby="title-tools">
+    <div class="modal-content-box">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <span class="stream-tag">AUTOMATION & OBSERVABILITY</span>
+      <h2 id="title-tools" style="margin-top: 0.25rem; font-size: 1.4rem;">Testing & Tooling</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+        End-to-end framework delivery, performance engineering, and APM telemetry pipelines[cite: 1].
+      </p>
+      <div class="tags">
+        <span class="tag">Playwright</span>
+        <span class="tag">Selenium WebDriver</span>
+        <span class="tag">Pact Contract Tests</span>
+        <span class="tag">Dynatrace APM</span>
+        <span class="tag">JMeter</span>
+        <span class="tag">Jira / Xray</span>
+      </div>
+    </div>
+  </div>
 
-  <!-- Dynamic Marquee Showcase -->
-  <ExpertiseMarquee />
+  <div class="modal-overlay" id="modal-stack" role="dialog" aria-modal="true" aria-labelledby="title-stack">
+    <div class="modal-content-box">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <span class="stream-tag">AGENTIC ARCHITECTURE & CLOUD</span>
+      <h2 id="title-stack" style="margin-top: 0.25rem; font-size: 1.4rem;">Tech Stack & AI</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+        Deterministic LLM testing harnesses, agentic state-routing, and modern cloud ecosystems[cite: 1].
+      </p>
+      <div class="tags">
+        <span class="tag">LangGraph</span>
+        <span class="tag">Python / Pytest</span>
+        <span class="tag">Ollama / Llama 3.2</span>
+        <span class="tag">AWS Cloud</span>
+        <span class="tag">Azure DevOps</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+  </div>
+
 </BaseLayout>
 
-<style>
-  .hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-top: 1rem;
+<script>
+  const triggers = document.querySelectorAll('.modal-trigger');
+  const overlays = document.querySelectorAll('.modal-overlay');
+  const closeBtns = document.querySelectorAll('.modal-close-btn');
+
+  function closeModal() {
+    overlays.forEach(overlay => overlay.classList.remove('active'));
   }
-  .hero-title {
-    font-size: 2.3rem;
-    font-weight: 800;
-    max-width: 800px;
-    line-height: 1.25;
-    background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-  }
-  .hero-subtitle {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    max-width: 680px;
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-  }
-</style>
+
+  triggers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      if (targetId) {
+        const modal = document.getElementById(targetId);
+        if (modal) modal.classList.add('active');
+      }
+    });
+  });
+
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', closeModal);
+  });
+
+  overlays.forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeModal();
+      }
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>

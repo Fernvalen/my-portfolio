@@ -11,8 +11,9 @@
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --accent-cyan: #38bdf8;
-  --accent-cyan-glow: rgba(56, 189, 248, 0.35);
-  --accent-purple: #a855f7;
+  --accent-orange: #ea580c;         /* 👈 Dark orange accent */
+  --accent-orange-hover: #c2410c;   /* 👈 Dark orange hover tone */
+  --accent-orange-glow: rgba(234, 88, 12, 0.4);
   --border-color: #1e293b;
   --border-hover: #334155;
   --success: #22c55e;
@@ -33,7 +34,7 @@
 
 /* 3. Base Body & Typography Styles */
 body {
-  background-color: var(--bg-primary);
+  background: linear-gradient(145deg, #000000 45%, #7c2d12 85%, #ea580c 100%);
   color: var(--text-main);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -138,8 +139,8 @@ main {
 
 .site-nav a:hover,
 .site-nav a.active {
-  color: var(--accent-cyan);
-  text-shadow: 0 0 8px var(--accent-cyan-glow);
+  color: var(--accent-orange);
+  text-shadow: 0 0 8px var(--accent-orange-glow);
 }
 
 .site-nav a.active::after {
@@ -149,9 +150,9 @@ main {
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--accent-cyan);
+  background: var(--accent-orange);
   border-radius: 2px;
-  box-shadow: 0 0 8px var(--accent-cyan-glow);
+  box-shadow: 0 0 8px var(--accent-orange-glow);
 }
 
 .site-footer {
@@ -193,8 +194,10 @@ main {
 }
 
 .primary-btn:hover {
+  background: var(--accent-orange);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 0 24px rgba(0, 242, 254, 0.55);
+  box-shadow: 0 0 24px var(--accent-orange-glow);
 }
 
 .secondary-btn {
@@ -204,7 +207,8 @@ main {
 }
 
 .secondary-btn:hover {
-  border-color: var(--accent-cyan);
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
   transform: translateY(-2px);
 }
 
@@ -462,5 +466,416 @@ main {
 
   .btn {
     width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Split Layout System (Sticky Profile + Content Stream)
+   ========================================================================== */
+
+.split-container {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+  min-height: calc(100vh - 160px);
+}
+
+/* --- Left Column: Fixed / Sticky Profile --- */
+.profile-sidebar {
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.profile-avatar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--accent-cyan);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-family: monospace;
+  width: fit-content;
+}
+
+.sidebar-name {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-bio {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.metric-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.metric-num {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: monospace;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Right Column: Scrollable Content Feed --- */
+.content-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.stream-section-header {
+  margin-bottom: 1.25rem;
+}
+
+.stream-section-header h2 {
+  font-size: 1.35rem;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.stream-tag {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Stream Cards */
+.stream-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stream-card:hover {
+  transform: translateX(4px);
+  border-color: var(--accent-cyan);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.card-top h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.card-date {
+  font-size: 0.8rem;
+  font-family: monospace;
+  color: var(--text-muted);
+}
+
+.card-body {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+/* Responsive Collapse */
+@media (max-width: 900px) {
+  .split-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .profile-sidebar {
+    position: static;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2rem;
+  }
+}
+/* ==========================================================================
+   Concept 1: Ultra-Minimalist Canvas with Margin Docks & Modal Overlays
+   ========================================================================== */
+
+/* Full-viewport canvas lock */
+.canvas-wrapper {
+  position: relative;
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 5rem;
+  overflow: hidden;
+  margin: auto 0;
+}
+
+/* Background Hobby Tapestry (Soccer, Gaming, Dogs, Travel) */
+.passions-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+  filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.2));
+}
+
+/* Center Hero Typographic Card */
+.hero-minimal {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.hero-minimal-name {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 0.75rem 0;
+  background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-minimal-title {
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  color: var(--accent-cyan);
+  letter-spacing: 0.02em;
+  margin: 0 0 1.25rem 0;
+}
+
+.hero-minimal-bio {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 0 2rem 0;
+}
+
+/* Left & Right Floating Margin Docks */
+.margin-dock {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 20;
+}
+
+.dock-left {
+  left: 1.5rem;
+}
+
+.dock-right {
+  right: 1.5rem;
+}
+
+.dock-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.dock-btn:hover {
+  color: var(--accent-orange);
+  border-color: var(--accent-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--accent-orange-glow);
+}
+
+.dock-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Tooltips */
+.dock-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.6rem;
+  background: #0f172a;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-size: 0.75rem;
+  font-family: monospace;
+  white-space: nowrap;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dock-left .dock-btn::after {
+  left: calc(100% + 10px);
+}
+
+.dock-right .dock-btn::after {
+  right: calc(100% + 10px);
+}
+
+.dock-btn:hover::after {
+  opacity: 1;
+}
+
+/* Fullscreen Backdrop Blur Modal Dialog */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(3, 7, 18, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 580px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.15);
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-content-box {
+  transform: scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  border-radius: 6px;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive Collapse for Small Screens */
+@media (max-width: 768px) {
+  .canvas-wrapper {
+    padding: 2.5rem 1rem;
+    min-height: auto;
+  }
+  
+  .mobile-docks-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    z-index: 10;
+  }
+  .margin-dock {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  .dock-left .dock-btn::after,
+  .dock-right .dock-btn::after {
+    display: none;
   }
 }
