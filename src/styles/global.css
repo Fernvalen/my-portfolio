@@ -879,3 +879,40 @@ main {
     display: none;
   }
 }
+
+/* 🟢 NEW: Variant Toggle Floating Pill */
+.variant-toggle-pill {
+  position: absolute;
+  top: 1.25rem;
+  z-index: 30;
+}
+
+.variant-toggle-pill a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(18, 7, 3, 0.85);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-family: monospace;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.variant-toggle-pill a:hover {
+  color: #ffffff;
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 12px var(--accent-orange-glow);
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-orange);
+  box-shadow: 0 0 6px var(--accent-orange);
+}
