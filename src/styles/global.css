@@ -880,33 +880,50 @@ main {
   }
 }
 
-/* 🟢 NEW: Variant Toggle Floating Pill */
+/* Variant Toggle Floating Pill (Multi-Variant) */
 .variant-toggle-pill {
   position: absolute;
   top: 1.25rem;
   z-index: 30;
-}
-
-.variant-toggle-pill a {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   background: rgba(18, 7, 3, 0.85);
   border: 1px solid var(--border-color);
-  color: var(--text-muted);
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
   font-size: 0.8rem;
   font-family: monospace;
-  text-decoration: none;
   backdrop-filter: blur(8px);
-  transition: all 0.25s ease;
 }
 
-.variant-toggle-pill a:hover {
+.variant-label {
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+.variant-pill-active {
   color: #ffffff;
+  background: rgba(234, 88, 12, 0.25);
+  border: 1px solid var(--accent-orange);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.variant-pill-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.variant-pill-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
   border-color: var(--accent-orange);
-  box-shadow: 0 0 12px var(--accent-orange-glow);
 }
 
 .pulse-dot {
@@ -915,4 +932,17 @@ main {
   border-radius: 50%;
   background-color: var(--accent-orange);
   box-shadow: 0 0 6px var(--accent-orange);
+}
+/* Helper container for pages where the pill sits in standard flow at top */
+.switcher-top-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding-top: 0.5rem;
+}
+.switcher-top-container .variant-toggle-pill {
+  position: relative;
+  top: auto;
 }

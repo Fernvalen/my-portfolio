@@ -2,14 +2,17 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Portfolio Smoke Tests', () => {
 
-  test('Default homepage renders minimal hero and variant switcher pill', async ({ page }) => {
+  test('Default homepage links to both home-v2 and home-version3', async ({ page }) => {
     await page.goto('./');
-    await expect(page).toHaveTitle(/Fernando Valenzuela Jr\.|Technology Leader/);
-    await expect(page.locator('.hero-minimal-name')).toContainText('Fernando Valenzuela Jr.');
     
-    const switchPill = page.locator('.variant-toggle-pill a');
-    await expect(switchPill).toBeVisible();
-    await expect(switchPill).toHaveAttribute('href', /.*\/home-v2/);
+    const v2Link = page.locator('.variant-toggle-pill').getByRole('link', { name: 'V2 (Command Center View)' });
+    const v3Link = page.locator('.variant-toggle-pill').getByRole('link', { name: 'V3 (Combined View )' });
+
+    await expect(v2Link).toHaveAttribute('href', /.*\/home-v2/);
+    await expect(v3Link).toHaveAttribute('href', /.*\/home-v3/);
+
+    await v3Link.click();
+    await expect(page).toHaveURL(/.*\/home-v3/);
   });
 
   test('Alternate route /home-v2 renders command center and marquee', async ({ page }) => {

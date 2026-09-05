@@ -12,7 +12,9 @@
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:visual": "playwright test tests/visual-regression.spec.ts",
+    "test:visual:update": "playwright test tests/visual-regression.spec.ts --update-snapshots"
   },
   "dependencies": {
     "astro": "^7.2.3"

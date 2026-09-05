@@ -1,0 +1,36 @@
+---
+// src/components/VariantSwitcher.astro
+interface Props {
+  current: 'v1' | 'v2' | 'v3';
+}
+
+const { current } = Astro.props;
+const base = import.meta.env.BASE_URL ?? '';
+const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
+---
+
+<nav class="variant-toggle-pill" aria-label="Homepage Layout Variants">
+  <span class="pulse-dot"></span>
+  <span class="variant-label">View:</span>
+
+  <!-- V1: Minimal -->
+  {current === 'v1' ? (
+    <span class="variant-pill-active">V1 (Minimal)</span>
+  ) : (
+    <a href={`${normalizedBase}/`} class="variant-pill-link">V1 (Minimal)</a>
+  )}
+
+  <!-- V2: Command Center -->
+  {current === 'v2' ? (
+    <span class="variant-pill-active">V2 (Command Center View)</span>
+  ) : (
+    <a href={`${normalizedBase}/home-v2`} class="variant-pill-link">V2 (Command Center View)</a>
+  )}
+
+  <!-- V3: Combined View -->
+  {current === 'v3' ? (
+    <span class="variant-pill-active">V3 (Combined View)</span>
+  ) : (
+    <a href={`${normalizedBase}/home-v3`} class="variant-pill-link">V3 (Combined View)</a>
+  )}
+</nav>
