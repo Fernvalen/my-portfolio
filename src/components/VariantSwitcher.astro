@@ -15,22 +15,22 @@ const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
 
   <!-- V1: Minimal -->
   {current === 'v1' ? (
-    <span class="variant-pill-active">V1 (Minimal)</span>
+    <span class="variant-pill-active">V1 (Min)</span>
   ) : (
-    <a href={`${normalizedBase}/`} class="variant-pill-link">V1 (Minimal)</a>
+    <a href={`${normalizedBase}/`} class="variant-pill-link">V1 (Min)</a>
   )}
 
   <!-- V2: Command Center -->
   {current === 'v2' ? (
-    <span class="variant-pill-active">V2 (Command Center View)</span>
+    <span class="variant-pill-active">V2 (Cmd)</span>
   ) : (
-    <a href={`${normalizedBase}/home-v2`} class="variant-pill-link">V2 (Command Center View)</a>
+    <a href={`${normalizedBase}/home-v2`} class="variant-pill-link">V2 (Cmd)</a>
   )}
 
   <!-- V3: Combined View -->
   {current === 'v3' ? (
-    <span class="variant-pill-active">V3 (Combined View)</span>
+    <span class="variant-pill-active">V3 (Mixed)</span>
   ) : (
-    <a href={`${normalizedBase}/home-v3`} class="variant-pill-link">V3 (Combined View)</a>
+    <a href={`${normalizedBase}/home-v3`} class="variant-pill-link">V3 (Mixed)</a>
   )}
 </nav>
