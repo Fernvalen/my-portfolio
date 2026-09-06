@@ -35,9 +35,9 @@ export const siteConfig: SiteConfig = {
   author: "Fernando Valenzuela Jr.",
   siteUrl: "https://fernvalen.github.io/my-portfolio",
   socials: {
-    email: "fernvalen@gmail.com",
+    email: "fernvalenjr@gmail.com",
     github: "https://github.com/fernvalen",
-    linkedin: "https://linkedin.com/in/fernvalen",
+    linkedin: "https://www.linkedin.com/in/fernando-valenzuela-jr/",
   },
   navItems: [
     { key: 'home', label: 'Home', href: '/' },
